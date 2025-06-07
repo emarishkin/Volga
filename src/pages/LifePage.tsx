@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import '../styles/LifePage.css'
@@ -7,12 +7,26 @@ type NoteMap = {
   [key: string]: string;
 };
 
+const STORAGE_KEY = 'volga_life_notes';
+
 function LifePage() {
   const [date, setDate] = useState<Date>(new Date());
   const [notes, setNotes] = useState<NoteMap>({});
   const [note, setNote] = useState('');
-
+  
   const key = date.toDateString();
+
+  useEffect(()=>{
+   const savedNotes = localStorage.getItem(STORAGE_KEY)
+   if(savedNotes){
+    setNotes(JSON.parse(savedNotes))
+   }
+  },[])
+
+  useEffect(() => {
+    setNote(notes[key] || '');
+  }, [key, notes]);
+
 
   const handleDateChange = (
     value: Date | [Date | null, Date | null] | null,
