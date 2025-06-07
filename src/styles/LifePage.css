@@ -1,19 +1,56 @@
-.life-container {
-  padding: 40px 20px 80px;
+.life-page {
+  padding: 20px;
+  padding-bottom: 80px;
+}
+
+.life-header {
   text-align: center;
+  margin-bottom: 16px;
 }
 
-.life-logo {
-  width: 120px;
-  margin-bottom: 20px;
+.calendar {
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  border: none;
+  margin: 0 auto;
+  max-width: 320px;
 }
 
-.life-title {
-  font-size: 32px;
-  margin: 0;
+.note-card {
+  margin-top: 20px;
+  background-color: var(--card-bg);
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.4);
 }
 
-.life-subtitle {
-  color: #777;
-  font-size: 16px;
+.note-input {
+  width: 100%;
+  background-color: #2a2a2a;
+  color: var(--text-color);
+  border: none;
+  border-radius: 8px;
+  padding: 10px;
+  min-height: 80px;
+  margin-top: 8px;
+  resize: vertical;
+}
+
+.save-btn {
+  margin-top: 10px;
+  padding: 10px;
+  width: 100%;
+  border: none;
+  background-color: var(--accent);
+  color: black;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.save-btn:hover {
+  background-color: #00acc1;
 }
