@@ -1,0 +1,23 @@
+.navbar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  background-color: var(--nav-bg);
+  border-top: 1px solid #333;
+  justify-content: space-around;
+  padding: 12px 0;
+  z-index: 1000;
+}
+
+.nav-item {
+  color: var(--nav-inactive);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  transition: color 0.3s;
+}
+
+.nav-item.active {
+  color: var(--nav-active);
+}

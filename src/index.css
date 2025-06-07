@@ -1,0 +1,23 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+}
+
+:root {
+  --bg-color: #121212;
+  --text-color: #f0f0f0;
+  --accent: #00bcd4;
+  --nav-bg: #1f1f1f;
+  --nav-active: #00bcd4;
+  --nav-inactive: #888;
+  --card-bg: #1e1e1e;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
