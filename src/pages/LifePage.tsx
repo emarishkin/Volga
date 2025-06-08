@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import '../styles/LifePage.css'
+import '../styles/LifePage.css';
 
 type NoteMap = {
   [key: string]: string;
@@ -13,24 +13,24 @@ function LifePage() {
   const [date, setDate] = useState<Date>(new Date());
   const [notes, setNotes] = useState<NoteMap>({});
   const [note, setNote] = useState('');
-  
+  const [showHistory, setShowHistory] = useState(false);
+
   const key = date.toDateString();
 
-  useEffect(()=>{
-   const savedNotes = localStorage.getItem(STORAGE_KEY)
-   if(savedNotes){
-    setNotes(JSON.parse(savedNotes))
-   }
-  },[])
+  useEffect(() => {
+    const savedNotes = localStorage.getItem(STORAGE_KEY);
+    if (savedNotes) {
+      setNotes(JSON.parse(savedNotes));
+    }
+  }, []);
 
   useEffect(() => {
     setNote(notes[key] || '');
   }, [key, notes]);
 
-
   const handleDateChange = (
     value: Date | [Date | null, Date | null] | null,
-    
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     if (value instanceof Date) {
       setDate(value);
@@ -40,8 +40,9 @@ function LifePage() {
   };
 
   const saveNote = () => {
-    setNotes(prev => ({ ...prev, [key]: note }));
-    setNote('');
+    const newNotes = { ...notes, [key]: note };
+    setNotes(newNotes);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(newNotes));
   };
 
   return (
@@ -54,12 +55,33 @@ function LifePage() {
         <h3>{key}</h3>
         <textarea
           className="note-input"
-          value={notes[key] || note}
+          value={note}
           onChange={(e) => setNote(e.target.value)}
           placeholder="Введите заметку..."
         />
         <button className="save-btn" onClick={saveNote}>Сохранить</button>
       </div>
+
+      <button className="history-btn" onClick={() => setShowHistory(prev => !prev)}>
+        {showHistory ? 'Скрыть историю' : 'Показать историю заметок'}
+      </button>
+
+      {showHistory && (
+        <div className="history-section">
+          <h3>История заметок</h3>
+          {Object.entries(notes).length === 0 ? (
+            <p>Нет сохранённых заметок.</p>
+          ) : (
+            <ul className="note-history">
+              {Object.entries(notes).map(([dateKey, text]) => (
+                <li key={dateKey} className="history-item">
+                  <strong>{dateKey}:</strong> {text}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      )}
     </div>
   );
 }
