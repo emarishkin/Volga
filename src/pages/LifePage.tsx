@@ -28,10 +28,7 @@ function LifePage() {
     setNote(notes[key] || '');
   }, [key, notes]);
 
-  const handleDateChange = (
-    value: Date | [Date | null, Date | null] | null,
-    
-  ) => {
+  const handleDateChange = (value: Date | [Date | null, Date | null] | null) => {
     if (value instanceof Date) {
       setDate(value);
     } else if (Array.isArray(value) && value[0] instanceof Date) {
